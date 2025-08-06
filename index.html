@@ -20,7 +20,7 @@ fetch('data.json')
     const columnDefs = [
       { field: 'artist', headerName: 'Artist', sortable: true, filter: true, flex: 2, pinned: 'left' },
       { field: 'song', headerName: 'Song', sortable: true, filter: true, flex: 2, pinned: 'left', minWidth: 300 },
-      { field: 'userdifficulty', headerName: 'User Difficulty', sortable: true, filter: true, flex: 1, cellStyle: { 'background-color': '#fdf3ce' } },
+      { field: 'userdifficulty', headerName: 'User Difficulty', sortable: true, filter: true, flex: 1, cellStyle: { 'background-color': '#fdf3ce', 'font-weight': 'bold' } },
       {
         field: 'usernotes',
         headerName: 'User Notes',
@@ -30,7 +30,7 @@ fetch('data.json')
         autoHeight: true,
         cellStyle: { 'white-space': 'normal' }
       },
-      { field: 'mmmdifficulty', headerName: 'MMM Difficulty', sortable: true, filter: true, flex: 1, cellStyle: { 'background-color': '#fbe6ce' }},
+      { field: 'mmmdifficulty', headerName: 'MMM Difficulty', sortable: true, filter: true, flex: 1, cellStyle: { 'background-color': '#fbe6ce', 'font-weight': 'bold' }},
       {
         field: 'mmmnotes',
         headerName: 'MMM Notes',
