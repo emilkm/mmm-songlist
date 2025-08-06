@@ -1,146 +1,71 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <link rel="stylesheet" href="webix.css" type="text/css">
-        <script src="webix.js" type="text/javascript"></script>
+        <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ag-grid-community/styles/ag-theme-alpine.css" />
         <link rel="stylesheet" href="app.css" type="text/css">
     </head>
     <body>
-        <script type="text/javascript" charset="utf-8">
-const options = [
-    { id: "M01", value: "M01" },
-    { id: "M02", value: "M02" },
-    { id: "M03", value: "M03" },
-    { id: "M04", value: "M04" },
-    { id: "M05", value: "M05" },
-    { id: "M06", value: "M06" },
-    { id: "M07", value: "M07" },
-    { id: "M08", value: "M08" },
-    { id: "M09", value: "M09" },
-    { id: "M10", value: "M10" },
-    { id: "M11", value: "M11" },
-    { id: "M12", value: "M12" },
-    { id: "M13", value: "M13" },
-    { id: "M14", value: "M14" },
-    { id: "M15", value: "M15" },
-    { id: "M16", value: "M16" },
-    { id: "M17", value: "M17" },
-    { id: "M18", value: "M18" },
-    { id: "M19", value: "M19" },
-    { id: "M20", value: "M20" },
-    { id: "M21", value: "M21" },
-    { id: "M22", value: "M22" },
-    { id: "M23", value: "M23" },
-    { id: "M24", value: "M24" },
-    { id: "M25", value: "M25" },
-    { id: "M26", value: "M26" },
-    { id: "M27", value: "M27" },
-    { id: "M28", value: "M28" },
-    { id: "M29", value: "M29" },
-    { id: "M30", value: "M30" },
-    { id: "M31", value: "M31" },
-    { id: "M32", value: "M32" },
-    { id: "G04", value: "G04" },
-    { id: "G05", value: "G05" },
-    { id: "G06", value: "G06" },
-    { id: "G07", value: "G07" },
-    { id: "G08", value: "G08" },
-    { id: "G09", value: "G09" },
-    { id: "G10", value: "G10" },
-    { id: "G11", value: "G11" },
-    { id: "G12", value: "G12" },
-    { id: "G13", value: "G13" },
-    { id: "G14", value: "G14" },
-    { id: "G15", value: "G15" },
-    { id: "G16", value: "G16" },
-    { id: "G17", value: "G17" },
-    { id: "G18", value: "G18" },
-    { id: "G19", value: "G19" },
-    { id: "G20", value: "G20" },
-    { id: "G21", value: "G21" },
-    { id: "G22", value: "G22" },
-];
-let batch1 = false;
-webix.ui({
-    rows: [
-        { view: "template", type: "header", template: "Sanskrit Vocab from Maurer and Goldmans (Search for 'atha' to find rows containing 'atha'. Search for '^atha' to find rows beginning with 'atha'.) Last updated from <a href='https://docs.google.com/spreadsheets/d/1gBftBUJqezG2QjUij7YBoZYQswpGYPYFmX9V3bfZues/edit?fbclid=IwAR0tsUlcNOEaVoUrmV2OEnpduxibComPaQ7OEZag4SV-iUWTV4LbrGtkbrA'> source</a>: 2021-07-30" },
-        {
-            cols: [
-                { view: "datatable", id: "tbl1", url: "data.json", datatype: "json", select: "row", resizeColumn: true, fixedRowHeight: false,
-                    ready: function() {
-                        this.adjustRowHeight("engl");
-                        this.adjustRowHeight("pada");
-                    },
-                    scheme: {
-                        $change: function(item) {
-                            let css = item.part;
-                            if (css.includes("noun")) {
-                                if (css.includes("proper")) {
-                                    css = "propernoun";
-                                } else if (css.includes("pro")) {
-                                    css = "pronoun";
-                                } else {
-                                    css = "noun";
-                                }
-                            } else if (css.includes("verb")) {
-                                if (css.includes("adv")) {
-                                    css = "adverb";
-                                } else {
-                                    css = "verb";
-                                }
-                            } else if (css.includes("adj")) {
-                                css = "adjective";
-                            } else if (css.includes("adv")) {
-                                css = "adverb";
-                            } else if (css.includes("prefix")) {
-                                css = "prefix";
-                            } else if (css.includes("phrase")) {
-                                css = "phrase";
-                            }
-                            item.$css = css;
-                        }
-                    },
-                    columns: [
-                        { id: "devn", header: ["Devanagari", {content: "textFilter"}], sort: "string", fillspace: 3, css: "devn" },
-                        { id: "iast", header: ["IAST", {content: "textFilter"}], sort: "string", fillspace: 3 },
-                        { id: "part", header: ["Part of Speech", {content: "textFilter"}], sort: "string", fillspace: 2, batch: 1 },
-                        { id: "gend", header: ["Gender", {content: "textFilter"}], sort: "string", width: 90 },
-                        { id: "engl", header: ["English", {content: "textFilter"}], sort: "string", fillspace: 5, batch: 1 },
-                        { id: "pada", header: ["Chapter", {content: "selectFilter", options: options}], fillspace: 2 }
-                    ],
-                },
-                { view: "resizer" },
-                { id: "rcol",
-                    rows: [
-                        {
-                            cols: [
-                                { view: 'button', label: 'Practice', width: 80, click: () => {
-                                    $$("tbl1").showColumnBatch(1, batch1);
-                                    batch1 = !batch1;
-                                }},
-                                {},
-                                { view: 'button', label: 'Close', width: 80, click: () => {
-                                    $$("rcol").hide();
-                                }}
-                            ]
-                        },
-                        { view: "form", id: "frm1", width: 500,
-                            elements: [
-                                { view: "text", name: "devn", css: "devnff", readonly: true },
-                                { view: "text", name: "iast", readonly: true },
-                                { view: "text", name: "part", readonly: true },
-                                { view: "textarea", name: "engl", readonly: true }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        }
-    ]
-});
-
-$$("frm1").bind("tbl1");
+        <script type="text/javascript">
+// Use legacy theme for AG Grid CDN
+fetch('data.json')
+  .then(response => response.text())
+  .then(text => {
+    let data = text.trim();
+    if (data.startsWith('[')) {
+      data = JSON.parse(data);
+    } else {
+      data = text.split('\n').map(line => line ? JSON.parse(line) : null).filter(Boolean);
+    }
+    const columnDefs = [
+      { field: 'artist', headerName: 'Artist', sortable: true, filter: true, flex: 2 },
+      { field: 'song', headerName: 'Song', sortable: true, filter: true, flex: 2 },
+      { field: 'userdifficulty', headerName: 'User Difficulty', sortable: true, filter: true, flex: 1 },
+      {
+        field: 'usernotes',
+        headerName: 'User Notes',
+        sortable: true,
+        filter: true,
+        width: 300,
+        autoHeight: true,
+        cellStyle: { 'white-space': 'normal' }
+      },
+      { field: 'mmmdifficulty', headerName: 'MMM Difficulty', sortable: true, filter: true, flex: 1 },
+      {
+        field: 'mmmnotes',
+        headerName: 'MMM Notes',
+        sortable: true,
+        filter: true,
+        width: 300,
+        autoHeight: true,
+        cellStyle: { 'white-space': 'normal' }
+      },
+      { field: 'style', headerName: 'Style', sortable: true, filter: true, flex: 1 },
+      { field: 'learn', headerName: 'Learn', sortable: true, filter: true, flex: 1 },
+      { field: 'tuning', headerName: 'Tuning', sortable: true, filter: true, flex: 1 },
+      { field: 'mmmtutorial', headerName: 'MMM Tutorial', sortable: true, filter: true, flex: 2 },
+      { field: 'timesignature', headerName: 'Time Signature', sortable: true, filter: true, flex: 1 }
+    ];
+    agGrid.createGrid(document.querySelector('#myGrid'), {
+      theme: 'legacy',
+      columnDefs,
+      rowData: data,
+      defaultColDef: {
+        resizable: true,
+        sortable: true,
+        filter: true,
+        floatingFilter: true, // <-- add this line
+        autoHeight: true,
+        cellStyle: { 'white-space': 'normal' }
+      },
+      animateRows: true,
+      pagination: true,
+      paginationPageSize: 50
+    });
+  });
         </script>
+
+        <div id="myGrid" class="ag-theme-alpine" style="height: 100%; width: 100%;"></div>
     </body>
 </html>
 

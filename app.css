@@ -1,50 +1,9 @@
-@font-face {
-    font-family: siddhanta;
-    src: url('siddhanta.woff2') format('woff2'), /* Super Modern Browsers */
-         url('siddhanta.woff') format('woff'), /* Pretty Modern Browsers */
-         url('siddhanta.ttf')  format('truetype');
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
-.devn {
-    font-size: 18px;
-    font-family: siddhanta;
-}
-.webix_el_text.devnff input {
-    font-size: 18px;
-    font-family: siddhanta;
-}
-.noun {
-    background-color: #fbe6ce;
-}
-.indeclinable {
-    background-color: #efefef;
-}
-.verb {
-    background-color: #ead1dc;
-}
-.adjective {
-    background-color: #fdf3ce;
-}
-.adverb {
-    background-color: #d1dfe3;
-}
-.pronoun {
-    background-color: #d8ead4;
-}
-.interjection {
-    background-color: #b5d8aa;
-}
-.ppp {
-    background-color: #f3cdcd;
-}
-.number {
-    background-color: #fce89d;
-}
-.prefix {
-    background-color: #cbd8f7;
-}
-.propernoun {
-    background-color: #f6ce9f;
-}
-.phrase {
-    background-color: #e5bab0;
+#myGrid {
+  height: 100vh;
+  width: 100vw;
 }
