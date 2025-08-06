@@ -18,9 +18,9 @@ fetch('data.json')
       data = text.split('\n').map(line => line ? JSON.parse(line) : null).filter(Boolean);
     }
     const columnDefs = [
-      { field: 'artist', headerName: 'Artist', sortable: true, filter: true, flex: 2 },
-      { field: 'song', headerName: 'Song', sortable: true, filter: true, flex: 2 },
-      { field: 'userdifficulty', headerName: 'User Difficulty', sortable: true, filter: true, flex: 1 },
+      { field: 'artist', headerName: 'Artist', sortable: true, filter: true, flex: 2, pinned: 'left' },
+      { field: 'song', headerName: 'Song', sortable: true, filter: true, flex: 2, pinned: 'left', minWidth: 300 },
+      { field: 'userdifficulty', headerName: 'User Difficulty', sortable: true, filter: true, flex: 1, cellStyle: { 'background-color': '#fdf3ce' } },
       {
         field: 'usernotes',
         headerName: 'User Notes',
@@ -30,7 +30,7 @@ fetch('data.json')
         autoHeight: true,
         cellStyle: { 'white-space': 'normal' }
       },
-      { field: 'mmmdifficulty', headerName: 'MMM Difficulty', sortable: true, filter: true, flex: 1 },
+      { field: 'mmmdifficulty', headerName: 'MMM Difficulty', sortable: true, filter: true, flex: 1, cellStyle: { 'background-color': '#fbe6ce' }},
       {
         field: 'mmmnotes',
         headerName: 'MMM Notes',
@@ -43,8 +43,9 @@ fetch('data.json')
       { field: 'style', headerName: 'Style', sortable: true, filter: true, flex: 1 },
       { field: 'learn', headerName: 'Learn', sortable: true, filter: true, flex: 1 },
       { field: 'tuning', headerName: 'Tuning', sortable: true, filter: true, flex: 1 },
-      { field: 'mmmtutorial', headerName: 'MMM Tutorial', sortable: true, filter: true, flex: 2 },
-      { field: 'timesignature', headerName: 'Time Signature', sortable: true, filter: true, flex: 1 }
+      { field: 'timesignature', headerName: 'Time Signature', sortable: true, filter: true, flex: 1 },
+      { field: 'mmmtutorial', headerName: 'MMM Tutorial', sortable: true, filter: true, flex: 2 }
+      
     ];
     agGrid.createGrid(document.querySelector('#myGrid'), {
       theme: 'legacy',
