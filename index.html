@@ -20,32 +20,15 @@ fetch('data.json')
     const columnDefs = [
       { field: 'artist', headerName: 'Artist', sortable: true, filter: true, flex: 2, pinned: 'left' },
       { field: 'song', headerName: 'Song', sortable: true, filter: true, flex: 2, pinned: 'left', minWidth: 300 },
-      { field: 'userdifficulty', headerName: 'User Difficulty', sortable: true, filter: true, flex: 1, cellStyle: { 'background-color': '#fdf3ce', 'font-weight': 'bold' } },
-      {
-        field: 'usernotes',
-        headerName: 'User Notes',
-        sortable: true,
-        filter: true,
-        width: 300,
-        autoHeight: true,
-        cellStyle: { 'white-space': 'normal' }
-      },
-      { field: 'mmmdifficulty', headerName: 'MMM Difficulty', sortable: true, filter: true, flex: 1, cellStyle: { 'background-color': '#fbe6ce', 'font-weight': 'bold' }},
-      {
-        field: 'mmmnotes',
-        headerName: 'MMM Notes',
-        sortable: true,
-        filter: true,
-        width: 300,
-        autoHeight: true,
-        cellStyle: { 'white-space': 'normal' }
-      },
+      { field: 'userdifficulty', headerName: 'User Difficulty', sortable: true, sortType: 'number', filter: true, flex: 1, cellStyle: { 'background-color': '#fdf3ce', 'font-weight': 'bold' } },
+      { field: 'usernotes', headerName: 'User Notes', sortable: true, filter: true, width: 300, autoHeight: true, cellStyle: { 'white-space': 'normal' } },
+      { field: 'mmmdifficulty', headerName: 'MMM Difficulty', sortable: true, sortType: 'number', filter: true, flex: 1, cellStyle: { 'background-color': '#fbe6ce', 'font-weight': 'bold' }},
+      { field: 'mmmnotes', headerName: 'MMM Notes', sortable: true, filter: true, width: 300, autoHeight: true, cellStyle: { 'white-space': 'normal' } },
       { field: 'style', headerName: 'Style', sortable: true, filter: true, flex: 1 },
       { field: 'learn', headerName: 'Learn', sortable: true, filter: true, flex: 1 },
       { field: 'tuning', headerName: 'Tuning', sortable: true, filter: true, flex: 1 },
       { field: 'timesignature', headerName: 'Time Signature', sortable: true, filter: true, flex: 1 },
       { field: 'mmmtutorial', headerName: 'MMM Tutorial', sortable: true, filter: true, flex: 2 }
-      
     ];
     agGrid.createGrid(document.querySelector('#myGrid'), {
       theme: 'legacy',
