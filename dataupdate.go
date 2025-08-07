@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"encoding/csv"
 	"encoding/json"
+	"flag"
 	"fmt"
 	"io"
 	"net/http"
@@ -19,6 +20,9 @@ var (
 type Row map[string]string
 
 func main() {
+	// Parse command-line flag for git push
+	doPush := flag.Bool("push", false, "also git add/commit/push data.json")
+	flag.Parse()
 	// Step 1: Download CSV
 	resp, err := http.Get(url)
 	if err != nil {
@@ -71,21 +75,28 @@ func main() {
 	}
 	os.WriteFile("data.json", jsonData, 0644)
 
-	// Step 4: Git add, commit, push
-	gitAdd := exec.Command("git", "add", "data.json")
-	gitAdd.Stdout = os.Stdout
-	gitAdd.Stderr = os.Stderr
-	_ = gitAdd.Run()
+	if *doPush {
+		// Only push if data.json has changes
+		gitDiff := exec.Command("git", "diff", "--quiet", "--", "data.json")
+		err := gitDiff.Run()
+		if err == nil {
+			fmt.Println("No changes to data.json, skipping git commit/push.")
+		} else {
+			gitAdd := exec.Command("git", "add", "data.json")
+			gitAdd.Stdout = os.Stdout
+			gitAdd.Stderr = os.Stderr
+			_ = gitAdd.Run()
 
-	gitCommit := exec.Command("git", "commit", "-m", "update data")
-	gitCommit.Stdout = os.Stdout
-	gitCommit.Stderr = os.Stderr
-	_ = gitCommit.Run()
+			gitCommit := exec.Command("git", "commit", "-m", "update data")
+			gitCommit.Stdout = os.Stdout
+			gitCommit.Stderr = os.Stderr
+			_ = gitCommit.Run()
 
-	gitPush := exec.Command("git", "push")
-	gitPush.Stdout = os.Stdout
-	gitPush.Stderr = os.Stderr
-	_ = gitPush.Run()
-
+			gitPush := exec.Command("git", "push")
+			gitPush.Stdout = os.Stdout
+			gitPush.Stderr = os.Stderr
+			_ = gitPush.Run()
+		}
+	}
 	fmt.Println("Done.")
 }
