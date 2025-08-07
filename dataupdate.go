@@ -1,0 +1,91 @@
+package main
+
+import (
+	"bufio"
+	"encoding/csv"
+	"encoding/json"
+	"fmt"
+	"io"
+	"net/http"
+	"os"
+	"os/exec"
+)
+
+var (
+	url        = "https://docs.google.com/spreadsheets/d/1jewXALlsOojcegEiGAWYvncWaUy1g8oRE5Oup68bfP0/gviz/tq?tqx=out:csv&sheet=Glossary"
+	newColumns = []string{"artist", "song", "userdifficulty", "usernotes", "mmmdifficulty", "mmmnotes", "style", "learn", "tuning", "timesignature", "mmmtutorial"}
+)
+
+type Row map[string]string
+
+func main() {
+	// Step 1: Download CSV
+	resp, err := http.Get(url)
+	if err != nil {
+		panic(err)
+	}
+	defer resp.Body.Close()
+	csvData, err := io.ReadAll(resp.Body)
+	if err != nil {
+		panic(err)
+	}
+	os.WriteFile("data.csv", csvData, 0644)
+
+	// Step 2: Read CSV, skip the first line (header), keep first 11 columns, rename
+	f, err := os.Open("data.csv")
+	if err != nil {
+		panic(err)
+	}
+	defer f.Close()
+	reader := csv.NewReader(bufio.NewReader(f))
+
+	// Always discard the first line, regardless of its content
+	_, err = reader.Read()
+	if err != nil {
+		panic(err)
+	}
+
+	var records []Row
+	for {
+		rec, err := reader.Read()
+		if err == io.EOF {
+			break
+		}
+		if err != nil {
+			continue // skip bad rows
+		}
+		if len(rec) < len(newColumns) {
+			continue // skip incomplete rows
+		}
+		row := Row{}
+		for i, col := range newColumns {
+			row[col] = rec[i]
+		}
+		records = append(records, row)
+	}
+
+	// Step 3: Write JSON array to data.json
+	jsonData, err := json.MarshalIndent(records, "", "  ")
+	if err != nil {
+		panic(err)
+	}
+	os.WriteFile("data.json", jsonData, 0644)
+
+	// Step 4: Git add, commit, push
+	gitAdd := exec.Command("git", "add", "data.json")
+	gitAdd.Stdout = os.Stdout
+	gitAdd.Stderr = os.Stderr
+	_ = gitAdd.Run()
+
+	gitCommit := exec.Command("git", "commit", "-m", "update data")
+	gitCommit.Stdout = os.Stdout
+	gitCommit.Stderr = os.Stderr
+	_ = gitCommit.Run()
+
+	gitPush := exec.Command("git", "push")
+	gitPush.Stdout = os.Stdout
+	gitPush.Stderr = os.Stderr
+	_ = gitPush.Run()
+
+	fmt.Println("Done.")
+}
