@@ -6,8 +6,46 @@
         <link rel="stylesheet" href="app.css" type="text/css">
     </head>
     <body>
+        <style>
+          .main-container {
+            display: flex;
+            height: 100vh;
+            width: 100vw;
+          }
+          #myGrid {
+            flex: 2;
+            min-width: 0;
+          }
+          #detailsCard {
+            flex: 1;
+            min-width: 300px;
+            max-width: 400px;
+            padding: 24px;
+            background: #f8f8f8;
+            border-left: 1px solid #ddd;
+            font-family: sans-serif;
+            overflow-y: auto;
+          }
+          .details-title {
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 0.5em;
+          }
+          .details-label {
+            font-weight: bold;
+            margin-top: 1em;
+          }
+          .details-value {
+            margin-left: 0.5em;
+          }
+        </style>
+        <div class="main-container">
+          <div id="myGrid" class="ag-theme-alpine"></div>
+          <div id="detailsCard">
+            <div style="color:#888;">Select a row to see details</div>
+          </div>
+        </div>
         <script type="text/javascript">
-// Use legacy theme for AG Grid CDN
 fetch('data.json')
   .then(response => response.text())
   .then(text => {
@@ -18,19 +56,22 @@ fetch('data.json')
       data = text.split('\n').map(line => line ? JSON.parse(line) : null).filter(Boolean);
     }
     const columnDefs = [
-      { field: 'artist', headerName: 'Artist', sortable: true, filter: true, flex: 2, pinned: 'left' },
-      { field: 'song', headerName: 'Song', sortable: true, filter: true, flex: 2, pinned: 'left', minWidth: 300 },
-      { field: 'userdifficulty', headerName: 'User Difficulty', sortable: true, sortType: 'number', filter: true, flex: 1, cellStyle: { 'background-color': '#fdf3ce', 'font-weight': 'bold' } },
-      { field: 'usernotes', headerName: 'User Notes', sortable: true, filter: true, width: 300, autoHeight: true, cellStyle: { 'white-space': 'normal' } },
-      { field: 'mmmdifficulty', headerName: 'MMM Difficulty', sortable: true, sortType: 'number', filter: true, flex: 1, cellStyle: { 'background-color': '#fbe6ce', 'font-weight': 'bold' }},
-      { field: 'mmmnotes', headerName: 'MMM Notes', sortable: true, filter: true, width: 300, autoHeight: true, cellStyle: { 'white-space': 'normal' } },
-      { field: 'style', headerName: 'Style', sortable: true, filter: true, flex: 1 },
-      { field: 'learn', headerName: 'Learn', sortable: true, filter: true, flex: 1 },
-      { field: 'tuning', headerName: 'Tuning', sortable: true, filter: true, flex: 1 },
-      { field: 'timesignature', headerName: 'Time Signature', sortable: true, filter: true, flex: 1 },
-      { field: 'mmmtutorial', headerName: 'MMM Tutorial', sortable: true, filter: true, flex: 2 }
+      { field: 'song', headerName: 'Song', sortable: true, filter: true, flex: 2, minWidth: 100 },  
+      { field: 'artist', headerName: 'Artist', sortable: true, filter: true, flex: 2, minWidth: 100 },
+      { field: 'mmmdifficulty', headerName: 'Difficulty', sortable: true, filter: true, flex: 1, minWidth: 90, 
+        cellStyle: { 'background-color': '#fbe6ce', 'font-weight': 'bold' }, filterParams: { suppressFilterButton: true } },
+      { field: 'style', headerName: 'Style', sortable: true, filter: true, flex: 1, minWidth: 90 },
+      { field: 'mmmnotes', headerName: 'Notes', sortable: true, filter: true, minWidth: 200, autoHeight: true, 
+        cellStyle: { 'white-space': 'normal' } },
+      { field: 'tuning', headerName: 'Tuning', sortable: true, filter: true, flex: 1, minWidth: 90 },
+      { field: 'timesignature', headerName: 'Time Signature', sortable: true, filter: true, flex: 1, minWidth: 90 },
+      { field: 'userdifficulty', headerName: 'User Difficulty', sortable: true, filter: true, flex: 1, minWidth: 90,
+        cellStyle: { 'background-color': '#fdf3ce', 'font-weight': 'bold' }, filterParams: { suppressFilterButton: true } },
+      { field: 'usernotes', headerName: 'User Notes', sortable: true, filter: true, minWidth: 200, autoHeight: true, cellStyle: { 'white-space': 'normal' } },
+      { field: 'learn', headerName: 'Learn', sortable: true, flex: 1, minWidth: 90 },
+      { field: 'mmmtutorial', headerName: 'Tutorial', sortable: true, flex: 2, minWidth: 90 }
     ];
-    agGrid.createGrid(document.querySelector('#myGrid'), {
+    const gridOptions = {
       theme: 'legacy',
       columnDefs,
       rowData: data,
@@ -44,12 +85,38 @@ fetch('data.json')
       },
       animateRows: true,
       pagination: true,
-      paginationPageSize: 50
-    });
+      paginationPageSize: 50,
+      rowSelection: { mode: 'singleRow' },
+      onSelectionChanged: onSelectionChanged
+    };
+    const gridDiv = document.querySelector('#myGrid');
+    const grid = agGrid.createGrid(gridDiv, gridOptions);
+
+    function onSelectionChanged() {
+      const selectedRows = grid.getSelectedRows();
+      const card = document.getElementById('detailsCard');
+      if (selectedRows.length === 0) {
+        card.innerHTML = '<div style="color:#888;">Select a row to see details</div>';
+        return;
+      }
+      const row = selectedRows[0];
+      card.innerHTML = `
+        <div class="details-title">${row.song || ''}</div>
+        <div><span class="details-label">Artist:</span><span class="details-value">${row.artist || ''}</span></div>
+        <div><span class="details-label">Difficulty:</span><span class="details-value">${row.mmmdifficulty || ''}</span></div>
+        <div><span class="details-label">Style:</span><span class="details-value">${row.style || ''}</span></div>
+        <div><span class="details-label">Tuning:</span><span class="details-value">${row.tuning || ''}</span></div>
+        <div><span class="details-label">Time Signature:</span><span class="details-value">${row.timesignature || ''}</span></div>
+        <div><span class="details-label">Notes:</span><span class="details-value">${row.mmmnotes || ''}</span></div>
+        <div><span class="details-label">User Difficulty:</span><span class="details-value">${row.userdifficulty || ''}</span></div>
+        <div><span class="details-label">User Notes:</span><span class="details-value">${row.usernotes || ''}</span></div>
+        <div><span class="details-label">Learn:</span><span class="details-value">${row.learn || ''}</span></div>
+        <div><span class="details-label">Tutorial:</span><span class="details-value">${row.mmmtutorial || ''}</span></div>
+      `;
+      console.log(card.innerHTML);
+    }
   });
         </script>
-
-        <div id="myGrid" class="ag-theme-alpine" style="height: 100%; width: 100%;"></div>
     </body>
 </html>
 
