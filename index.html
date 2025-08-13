@@ -56,7 +56,7 @@ fetch('data.json')
       data = text.split('\n').map(line => line ? JSON.parse(line) : null).filter(Boolean);
     }
     const columnDefs = [
-      { field: 'song', headerName: 'Song', sortable: true, filter: true, flex: 2, minWidth: 100 },  
+      { field: 'song', headerName: 'Song', sortable: true, filter: true, flex: 2, minWidth: 150 },  
       { field: 'artist', headerName: 'Artist', sortable: true, filter: true, flex: 2, minWidth: 100 },
       { field: 'mmmdifficulty', headerName: 'Difficulty', sortable: true, filter: true, flex: 1, minWidth: 90, 
         cellStyle: { 'background-color': '#fbe6ce', 'font-weight': 'bold' }, filterParams: { suppressFilterButton: true } },
@@ -86,7 +86,8 @@ fetch('data.json')
       animateRows: true,
       pagination: true,
       paginationPageSize: 50,
-      rowSelection: { mode: 'singleRow' },
+      rowSelection: { mode: 'singleRow', checkboxes: false, enableClickSelection: true },
+      
       onSelectionChanged: onSelectionChanged
     };
     const gridDiv = document.querySelector('#myGrid');
