@@ -39,6 +39,10 @@
             margin-left: 0.5em;
           }
         </style>
+        <div class="header">
+          <img src="mmmlogo.png" alt="MMM-Songlist Logo" style="height: 30px; vertical-align: middle; padding: 5px;">
+          <h1 style="display: inline; margin-left: 0.5em;">Mike's Music Method - Song List</h1>
+        </div>
         <div class="main-container">
           <div id="myGrid" class="ag-theme-alpine"></div>
           <div id="detailsCard">
@@ -46,6 +50,11 @@
           </div>
         </div>
         <script type="text/javascript">
+const getLinks = (value) => {
+  if (!value) return '';
+  const links = value.split(' ').map(link => link.trim()).filter(link => link);
+  return links.map(link => `<a href="${link}" target="_blank">${link}</a>`).join('<br>');
+};
 fetch('data.json')
   .then(response => response.text())
   .then(text => {
@@ -69,7 +78,9 @@ fetch('data.json')
         cellStyle: { 'background-color': '#fdf3ce', 'font-weight': 'bold' }, filterParams: { suppressFilterButton: true } },
       { field: 'usernotes', headerName: 'User Notes', sortable: true, filter: true, minWidth: 200, autoHeight: true, cellStyle: { 'white-space': 'normal' } },
       { field: 'learn', headerName: 'Learn', sortable: true, flex: 1, minWidth: 90 },
-      { field: 'mmmtutorial', headerName: 'Tutorial', sortable: true, flex: 2, minWidth: 90 }
+      { field: 'mmmtutorial', headerName: 'Tutorial', sortable: true, flex: 2, minWidth: 90,
+        cellRenderer: (params) => getLinks(params.value) 
+      }
     ];
     const gridOptions = {
       theme: 'legacy',
@@ -112,7 +123,7 @@ fetch('data.json')
         <div><span class="details-label">User Difficulty:</span><span class="details-value">${row.userdifficulty || ''}</span></div>
         <div><span class="details-label">User Notes:</span><span class="details-value">${row.usernotes || ''}</span></div>
         <div><span class="details-label">Learn:</span><span class="details-value">${row.learn || ''}</span></div>
-        <div><span class="details-label">Tutorial:</span><span class="details-value">${row.mmmtutorial || ''}</span></div>
+        <div><span class="details-label">Tutorial:</span><span class="details-value">${getLinks(row.mmmtutorial || '')}</span></div>
       `;
       console.log(card.innerHTML);
     }
