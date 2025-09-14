@@ -51,12 +51,34 @@
             font-weight: bold;
             margin-bottom: 0.5em;
           }
+          .details-row {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.5em;
+          }
           .details-label {
-            font-weight: bold;
-            margin-top: 1em;
+            color: #888;
+            min-width: 120px;
+            max-width: 120px;
+            font-weight: normal;
+            margin-top: 0;
+            flex-shrink: 0;
           }
           .details-value {
+            flex: 1;
             margin-left: 0.5em;
+            word-break: break-word;
+          }
+          .details-notes-label {
+            color: #888;
+            font-weight: normal;
+            margin-bottom: 0.2em;
+            margin-top: 1em;
+            display: block;
+          }
+          .details-notes-value {
+            margin-bottom: 0.8em;
+            word-break: break-word;
           }
         </style>
         <div class="wrapper">
@@ -78,6 +100,22 @@ const getLinks = (value) => {
   const links = value.split(' ').map(link => link.trim()).filter(link => link);
   return links.map(link => `<a href="${link}" target="_blank">${link}</a>`).join('<br>');
 };
+function getYouTubeThumbnails(value) {
+  if (!value) return '';
+  // Find all YouTube links in the value
+  const urls = value.match(/https?:\/\/(www\.)?(youtube\.com\/watch\?v=|youtu\.be\/)[^\s]+/g) || [];
+  return urls.map(url => {
+    let videoId = '';
+    const ytMatch = url.match(/[?&]v=([\w-]{11})/);
+    const shortMatch = url.match(/youtu\.be\/([\w-]{11})/);
+    if (ytMatch) videoId = ytMatch[1];
+    else if (shortMatch) videoId = shortMatch[1];
+    if (videoId) {
+      return `<a href="${url}" target="_blank"><img src="https://img.youtube.com/vi/${videoId}/hqdefault.jpg" alt="YouTube Thumbnail" style="height:120px;margin-right:8px;border-radius:6px;box-shadow:0 2px 8px #0001;"></a>`;
+    }
+    return '';
+  }).join('');
+}
 fetch('data.json')
   .then(response => response.text())
   .then(text => {
@@ -87,6 +125,17 @@ fetch('data.json')
     } else {
       data = text.split('\n').map(line => line ? JSON.parse(line) : null).filter(Boolean);
     }
+    function tuningCellRenderer(params) {
+      return params.value || 'Standard';
+    }
+    function timeSignatureCellRenderer(params) {
+      return params.value || '4/4';
+    }
+    function truncateCellRenderer(params) {
+      const value = params.value || '';
+      if (typeof value !== 'string') return value;
+      return value.length > 100 ? value.slice(0, 100) + '...' : value;
+    }
     const columnDefs = [
       { field: 'song', headerName: 'Song', sortable: true, filter: true, flex: 2, minWidth: 150 },  
       { field: 'artist', headerName: 'Artist', sortable: true, filter: true, flex: 2, minWidth: 100 },
@@ -94,12 +143,15 @@ fetch('data.json')
         cellStyle: { 'background-color': '#fbe6ce', 'font-weight': 'bold' }, filterParams: { suppressFilterButton: true } },
       { field: 'style', headerName: 'Style', sortable: true, filter: true, flex: 1, minWidth: 90 },
       { field: 'mmmnotes', headerName: 'Notes', sortable: true, filter: true, minWidth: 200, autoHeight: true, 
-        cellStyle: { 'white-space': 'normal' } },
-      { field: 'tuning', headerName: 'Tuning', sortable: true, filter: true, flex: 1, minWidth: 90 },
-      { field: 'timesignature', headerName: 'Time Signature', sortable: true, filter: true, flex: 1, minWidth: 90 },
+        cellStyle: { 'white-space': 'normal' }, cellRenderer: truncateCellRenderer },
+      { field: 'tuning', headerName: 'Tuning', sortable: true, filter: true, flex: 1, minWidth: 90, 
+        cellRenderer: tuningCellRenderer },
+      { field: 'timesignature', headerName: 'Time Signature', sortable: true, filter: true, flex: 1, minWidth: 90, 
+        cellRenderer: timeSignatureCellRenderer },
       { field: 'userdifficulty', headerName: 'User Difficulty', sortable: true, filter: true, flex: 1, minWidth: 90,
         cellStyle: { 'background-color': '#fdf3ce', 'font-weight': 'bold' }, filterParams: { suppressFilterButton: true } },
-      { field: 'usernotes', headerName: 'User Notes', sortable: true, filter: true, minWidth: 200, autoHeight: true, cellStyle: { 'white-space': 'normal' } },
+      { field: 'usernotes', headerName: 'User Notes', sortable: true, filter: true, minWidth: 200, autoHeight: true, 
+        cellStyle: { 'white-space': 'normal' }, cellRenderer: truncateCellRenderer },
       { field: 'learn', headerName: 'Learn', sortable: true, flex: 1, minWidth: 90 },
       { field: 'mmmtutorial', headerName: 'Tutorial', sortable: true, flex: 2, minWidth: 90,
         cellRenderer: (params) => getLinks(params.value) 
@@ -122,10 +174,13 @@ fetch('data.json')
       paginationPageSize: 50,
       rowSelection: { mode: 'singleRow', checkboxes: false, enableClickSelection: true },
       
-      onSelectionChanged: onSelectionChanged
+      onSelectionChanged: onSelectionChanged,
+      onFilterChanged: onFilterChanged
     };
     const gridDiv = document.querySelector('#myGrid');
     const grid = agGrid.createGrid(gridDiv, gridOptions);
+
+    
 
     function onSelectionChanged() {
       const selectedRows = grid.getSelectedRows();
@@ -137,18 +192,39 @@ fetch('data.json')
       const row = selectedRows[0];
       card.innerHTML = `
         <div class="details-title">${row.song || ''}</div>
-        <div><span class="details-label">Artist:</span><span class="details-value">${row.artist || ''}</span></div>
-        <div><span class="details-label">Difficulty:</span><span class="details-value">${row.mmmdifficulty || ''}</span></div>
-        <div><span class="details-label">Style:</span><span class="details-value">${row.style || ''}</span></div>
-        <div><span class="details-label">Tuning:</span><span class="details-value">${row.tuning || ''}</span></div>
-        <div><span class="details-label">Time Signature:</span><span class="details-value">${row.timesignature || ''}</span></div>
-        <div><span class="details-label">Notes:</span><span class="details-value">${row.mmmnotes || ''}</span></div>
-        <div><span class="details-label">User Difficulty:</span><span class="details-value">${row.userdifficulty || ''}</span></div>
-        <div><span class="details-label">User Notes:</span><span class="details-value">${row.usernotes || ''}</span></div>
-        <div><span class="details-label">Learn:</span><span class="details-value">${row.learn || ''}</span></div>
-        <div><span class="details-label">Tutorial:</span><span class="details-value">${getLinks(row.mmmtutorial || '')}</span></div>
+        <div class="details-row"><span class="details-label">Artist</span><span class="details-value">${row.artist || ''}</span></div>
+        <div class="details-row"><span class="details-label">Difficulty</span><span class="details-value">${row.mmmdifficulty || ''}</span></div>
+        <div class="details-row"><span class="details-label">Style</span><span class="details-value">${row.style || ''}</span></div>
+        <div class="details-row"><span class="details-label">Tuning</span><span class="details-value">${row.tuning || ''}</span></div>
+        <div class="details-row"><span class="details-label">Time Signature</span><span class="details-value">${row.timesignature || ''}</span></div>
+        <div class="details-notes-label">Notes</div>
+        <div class="details-notes-value">${row.mmmnotes || ''}</div>
+        <div class="details-row"><span class="details-label">User Difficulty</span><span class="details-value">${row.userdifficulty || ''}</span></div>
+        <div class="details-notes-label">User Notes</div>
+        <div class="details-notes-value">${row.usernotes || ''}</div>
+        <div class="details-row"><span class="details-label">Learn</span><span class="details-value">${row.learn || ''}</span></div>
+        <div class="details-row"><span class="details-label">Tutorial</span><span class="details-value">${getLinks(row.mmmtutorial || '')}</span></div>
+        <div class="details-row"><span class="details-label">Video</span><span class="details-value">${getYouTubeThumbnails(row.mmmtutorial || '')}</span></div>
       `;
       console.log(card.innerHTML);
+    }
+
+    function onFilterChanged() {
+      const selectedRows = grid.getSelectedRows();
+      if (selectedRows.length === 0) return;
+      // Check if the selected row is still displayed
+      let found = false;
+      for (let i = 0; i < grid.getDisplayedRowCount(); i++) {
+        const rowNode = grid.getDisplayedRowAtIndex(i);
+        if (rowNode && rowNode.isSelected && rowNode.isSelected()) {
+          found = true;
+          break;
+        }
+      }
+      if (!found) {
+        const card = document.getElementById('detailsCard');
+        card.innerHTML = '<div style="color:#888;">Select a row to see details</div>';
+      }
     }
   });
         </script>

@@ -4,7 +4,7 @@
     "learn": "",
     "mmmdifficulty": "7",
     "mmmnotes": "Quite hard bc it's so goofy and unconventional.",
-    "mmmtutorial": "",
+    "mmmtutorial": "https://youtu.be/b2rUoe84hxY",
     "song": "Two Reverse",
     "style": "Travis w Melody",
     "timesignature": "",
@@ -13,11 +13,24 @@
     "usernotes": ""
   },
   {
+    "artist": "Adrianne Lenker (Steve Fisher's cover)",
+    "learn": "",
+    "mmmdifficulty": "3",
+    "mmmnotes": "A lot of beauty in the simplicity of it. Gives me goosebumps. The verse vocal melody is a drone of the 3rd scale degree, then 2nd scale degree.",
+    "mmmtutorial": "https://www.youtube.com/watch?v=fS9l4ZiHXP8",
+    "song": "Anything",
+    "style": "Travis",
+    "timesignature": "",
+    "tuning": "",
+    "userdifficulty": "3",
+    "usernotes": "Fretting hand index finger gets a workout holding first fret second string throughout. Fretting hand movements is very economical, and has a nice symmetry making it easy to remember."
+  },
+  {
     "artist": "Benjamin Tod",
     "learn": "",
     "mmmdifficulty": "5",
     "mmmnotes": "Sneaky Hard. Nothing technically complicated, but the variations are so random and endless! Not much extra melody, but hammers.",
-    "mmmtutorial": "",
+    "mmmtutorial": "https://www.youtube.com/watch?v=YdrtmfUTICo",
     "song": "End With You",
     "style": "Travis w Melody",
     "timesignature": "",
@@ -87,7 +100,7 @@
     "style": "Finger Picked",
     "timesignature": "",
     "tuning": "",
-    "userdifficulty": "7",
+    "userdifficulty": "",
     "usernotes": ""
   },
   {
@@ -204,7 +217,7 @@
     "style": "Travis - Basic Pattern",
     "timesignature": "",
     "tuning": "",
-    "userdifficulty": "",
+    "userdifficulty": "3",
     "usernotes": ""
   },
   {
@@ -282,6 +295,19 @@
     "style": "Travis",
     "timesignature": "",
     "tuning": "Open A",
+    "userdifficulty": "5",
+    "usernotes": ""
+  },
+  {
+    "artist": "Bo Dylan",
+    "learn": "",
+    "mmmdifficulty": "5",
+    "mmmnotes": "Fast picking!",
+    "mmmtutorial": "https://youtu.be/Pf2DgUqsI4c",
+    "song": "See That My Grave is Kept Clean",
+    "style": "Flat Picking",
+    "timesignature": "",
+    "tuning": "Drop D",
     "userdifficulty": "",
     "usernotes": ""
   },
@@ -496,6 +522,19 @@
   {
     "artist": "Dave Van Ronk",
     "learn": "",
+    "mmmdifficulty": "5",
+    "mmmnotes": "Sneaky tricky.",
+    "mmmtutorial": "https://youtu.be/4ZMM5CO3rh4",
+    "song": "He Was a Friend of Mine",
+    "style": "Travis - Basic Pattern",
+    "timesignature": "",
+    "tuning": "",
+    "userdifficulty": "",
+    "usernotes": ""
+  },
+  {
+    "artist": "Dave Van Ronk",
+    "learn": "",
     "mmmdifficulty": "4",
     "mmmnotes": "",
     "mmmtutorial": "",
@@ -568,7 +607,7 @@
     "style": "Travis +",
     "timesignature": "",
     "tuning": "",
-    "userdifficulty": "",
+    "userdifficulty": "8, 9",
     "usernotes": ""
   },
   {
@@ -607,7 +646,7 @@
     "style": "Travis w Melody",
     "timesignature": "",
     "tuning": "",
-    "userdifficulty": "",
+    "userdifficulty": "4, 5",
     "usernotes": "Good song to build up speed with those cowboy fingerpicking songs. Classic chords, flow and structure. "
   },
   {
@@ -678,7 +717,7 @@
   {
     "artist": "Fleetwood Mac",
     "learn": "",
-    "mmmdifficulty": "1/9",
+    "mmmdifficulty": "10",
     "mmmnotes": "Only 15 measures. But the speed and 2 over 3 rhythm with the ring finger. I hated learning this song!",
     "mmmtutorial": "",
     "song": "Never Going Back Again",
@@ -750,7 +789,7 @@
     "style": "Hybrid: Travis + Strum",
     "timesignature": "",
     "tuning": "",
-    "userdifficulty": "5",
+    "userdifficulty": "",
     "usernotes": ""
   },
   {
@@ -834,7 +873,7 @@
   {
     "artist": "J.J. Cale",
     "learn": "*",
-    "mmmdifficulty": "1/5",
+    "mmmdifficulty": "6",
     "mmmnotes": "Fun! Short w simple chords, but fast! Excellent fills and style.",
     "mmmtutorial": "",
     "song": "Drifter’s Wife",
@@ -901,7 +940,7 @@
     "learn": "",
     "mmmdifficulty": "3",
     "mmmnotes": "Easy to simplify",
-    "mmmtutorial": "https://www.youtube.com/watch?v=ChcS79uKwqk",
+    "mmmtutorial": "",
     "song": "Theif and a Liar",
     "style": "Travis - Basic Pattern",
     "timesignature": "",
@@ -938,7 +977,7 @@
   {
     "artist": "John Denver",
     "learn": "",
-    "mmmdifficulty": "1-1",
+    "mmmdifficulty": "2",
     "mmmnotes": "Easy fingerpicker",
     "mmmtutorial": "",
     "song": "Sunshine On My Shoulders",
@@ -997,7 +1036,7 @@
     "style": "Travis - Basic Pattern (some melody)",
     "timesignature": "",
     "tuning": "",
-    "userdifficulty": "",
+    "userdifficulty": "4",
     "usernotes": ""
   },
   {
@@ -1167,7 +1206,7 @@
     "timesignature": "",
     "tuning": "",
     "userdifficulty": "",
-    "usernotes": "  "
+    "usernotes": "Easy to learn, hard to master. Some moves take practice to land. "
   },
   {
     "artist": "John Prine",
@@ -1263,6 +1302,19 @@
   {
     "artist": "Leonard Cohen",
     "learn": "",
+    "mmmdifficulty": "3/5",
+    "mmmnotes": "The right hand picking is a joy and not very hard. But if you're left hand has only played cowboy chords you will have an epic stuggle with some of these unique barre chords.",
+    "mmmtutorial": "https://youtu.be/KS_v1BCkUqU",
+    "song": "Seems So Long Ago, Nancy",
+    "style": "Fingerpicked",
+    "timesignature": "",
+    "tuning": "",
+    "userdifficulty": "",
+    "usernotes": ""
+  },
+  {
+    "artist": "Leonard Cohen",
+    "learn": "",
     "mmmdifficulty": "5",
     "mmmnotes": "Easy to play slow. But fast at tempo. Relentless triplets! This will build up your endurance and precsion! Similar to the Stranger Song",
     "mmmtutorial": "",
@@ -1304,9 +1356,22 @@
     "learn": "",
     "mmmdifficulty": "4",
     "mmmnotes": "A little color at the begining and a Bm barre chord to look out for.",
-    "mmmtutorial": "",
+    "mmmtutorial": "https://www.youtube.com/watch?v=YoyD3gAGuOs",
     "song": "Get Lucky",
     "style": "Travis - Basic Pattern",
+    "timesignature": "",
+    "tuning": "",
+    "userdifficulty": "",
+    "usernotes": ""
+  },
+  {
+    "artist": "Martin Carthy",
+    "learn": "",
+    "mmmdifficulty": "4",
+    "mmmnotes": "Really pretty piece. Straight forward picking, but gets a bit harder at the second half.",
+    "mmmtutorial": "https://youtu.be/VChDg5kPvsw",
+    "song": "Scarborough Fair",
+    "style": "Fingerpicked",
     "timesignature": "",
     "tuning": "",
     "userdifficulty": "",
@@ -1453,7 +1518,7 @@
     "timesignature": "",
     "tuning": "",
     "userdifficulty": "5",
-    "usernotes": "Strenghten your fretting hand pinky."
+    "usernotes": "Strenghten your fretting hand pinky. Learning the Swing feel and the John Hurt flutter is great fun. "
   },
   {
     "artist": "Mississippi John Hurt",
@@ -1538,7 +1603,7 @@
     "learn": "",
     "mmmdifficulty": "4",
     "mmmnotes": "Easier for MJH. Has a few moves up the neck but not a bad MJH to start with.",
-    "mmmtutorial": "",
+    "mmmtutorial": "https://www.youtube.com/watch?v=WLRuFmduIH4",
     "song": "Since I’ve Laid My Burden Down",
     "style": "Travis w Melody",
     "timesignature": "",
@@ -1556,7 +1621,7 @@
     "style": "",
     "timesignature": "",
     "tuning": "",
-    "userdifficulty": "",
+    "userdifficulty": "5",
     "usernotes": ""
   },
   {
@@ -1757,7 +1822,7 @@
   {
     "artist": "Roy Harper",
     "learn": "*",
-    "mmmdifficulty": "1/4",
+    "mmmdifficulty": "5",
     "mmmnotes": "Beautiful open D piece. Another great one to venture into alt tunings. Such a beautiful, full sound without being too complicated.",
     "mmmtutorial": "",
     "song": "Forever",
@@ -1809,7 +1874,7 @@
   {
     "artist": "Simon and Garfunkel",
     "learn": "*",
-    "mmmdifficulty": "1/3",
+    "mmmdifficulty": "4",
     "mmmnotes": "Love this song! It was one that helped kick off my channel, and I still think my most popular tutorial to date. Some of the chord changes are hard to warp the left hand around.",
     "mmmtutorial": "",
     "song": "Kathy’s Song",
@@ -1829,7 +1894,7 @@
     "style": "Travis - Basic Pattern (w some melody)",
     "timesignature": "",
     "tuning": "",
-    "userdifficulty": "3",
+    "userdifficulty": "",
     "usernotes": ""
   },
   {
@@ -2017,7 +2082,7 @@
   {
     "artist": "Townes Van Zandt",
     "learn": "",
-    "mmmdifficulty": "1/5",
+    "mmmdifficulty": "6",
     "mmmnotes": "Masterful use of triplets on hammers and pulls!",
     "mmmtutorial": "",
     "song": "Delta Momma Blues",
@@ -2043,7 +2108,7 @@
   {
     "artist": "Townes Van Zandt",
     "learn": "",
-    "mmmdifficulty": "1/2",
+    "mmmdifficulty": "3",
     "mmmnotes": "Easy for a Townes piece.",
     "mmmtutorial": "",
     "song": "Don’t Let the Sunshine Fool Ya",
@@ -2058,10 +2123,10 @@
     "learn": "",
     "mmmdifficulty": "4",
     "mmmnotes": "Geat pick-strum piece.",
-    "mmmtutorial": "",
+    "mmmtutorial": "3/4",
     "song": "Don't You Take it Too Bad",
     "style": "Strummer - Pick-Strum",
-    "timesignature": "3/4",
+    "timesignature": "",
     "tuning": "",
     "userdifficulty": "",
     "usernotes": ""
@@ -2108,7 +2173,7 @@
   {
     "artist": "Townes Van Zandt",
     "learn": "",
-    "mmmdifficulty": "1/3",
+    "mmmdifficulty": "4",
     "mmmnotes": "a Great study an interesting variation on the same chords. He's constantly changing string sets and where you expect the thumb to go.",
     "mmmtutorial": "",
     "song": "Gypsy Friday",
@@ -2128,7 +2193,7 @@
     "style": "Travis - Basic Pattern (w some melody)",
     "timesignature": "",
     "tuning": "",
-    "userdifficulty": "5",
+    "userdifficulty": "",
     "usernotes": ""
   },
   {
@@ -2141,7 +2206,7 @@
     "style": "Travis - Basic Pattern ",
     "timesignature": "",
     "tuning": "",
-    "userdifficulty": "",
+    "userdifficulty": "2",
     "usernotes": ""
   },
   {
@@ -2154,7 +2219,7 @@
     "style": "Travis w Melody",
     "timesignature": "",
     "tuning": "",
-    "userdifficulty": "4",
+    "userdifficulty": "",
     "usernotes": ""
   },
   {
@@ -2199,7 +2264,7 @@
   {
     "artist": "Townes Van Zandt",
     "learn": "",
-    "mmmdifficulty": "1/6",
+    "mmmdifficulty": "7",
     "mmmnotes": "As close to \"lead\" playing in the folk world as you're gonna get.",
     "mmmtutorial": "",
     "song": "Lungs",
@@ -2284,13 +2349,13 @@
     "style": "Travis - Basic Pattern",
     "timesignature": "",
     "tuning": "",
-    "userdifficulty": "3",
+    "userdifficulty": "",
     "usernotes": ""
   },
   {
     "artist": "Townes Van Zandt",
     "learn": "",
-    "mmmdifficulty": "1/3",
+    "mmmdifficulty": "4",
     "mmmnotes": "Haunting, dark, to the point. Easy enough to get the notes, but hard to get the feel. Especially the loose rhythm of the intro. Learn the verse first.",
     "mmmtutorial": "",
     "song": "Nothin'",
@@ -2414,7 +2479,7 @@
     "style": "Fingerpicking",
     "timesignature": "",
     "tuning": "3/4",
-    "userdifficulty": "",
+    "userdifficulty": "1",
     "usernotes": ""
   },
   {
@@ -2446,7 +2511,7 @@
   {
     "artist": "Townes Van Zandt",
     "learn": "",
-    "mmmdifficulty": "1/4",
+    "mmmdifficulty": "5",
     "mmmnotes": "Only hard bc of the speed and thumb. But the pattern is straightfoward and unwavering.",
     "mmmtutorial": "",
     "song": "Waiting Around to Die",

@@ -13,17 +13,19 @@ import (
 )
 
 var (
-	url        = "https://docs.google.com/spreadsheets/d/1jewXALlsOojcegEiGAWYvncWaUy1g8oRE5Oup68bfP0/gviz/tq?tqx=out:csv&sheet=Glossary"
-	newColumns = []string{"artist", "song", "userdifficulty", "usernotes", "mmmdifficulty", "mmmnotes", "style", "learn", "tuning", "timesignature", "mmmtutorial"}
+	defaultSheetID = "1f11V7FE24SdahFwFJMDPjBPJ4rxV9mxs2xm1ufMhCUw"
+	newColumns     = []string{"artist", "song", "userdifficulty", "usernotes", "mmmdifficulty", "mmmnotes", "style", "learn", "tuning", "mmmtutorial", "timesignature"}
 )
 
 type Row map[string]string
 
 func main() {
-	// Parse command-line flag for git push
+	// Parse command-line flags
 	doPush := flag.Bool("push", false, "also git add/commit/push data.json")
+	sheetID := flag.String("sheetid", defaultSheetID, "Google Sheet ID to fetch data from")
 	flag.Parse()
 	// Step 1: Download CSV
+	url := fmt.Sprintf("https://docs.google.com/spreadsheets/d/%s/gviz/tq?tqx=out:csv&sheet=Glossary", *sheetID)
 	resp, err := http.Get(url)
 	if err != nil {
 		panic(err)
